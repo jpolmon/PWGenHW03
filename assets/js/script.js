@@ -21,17 +21,47 @@ console.log(allValues);
 console.log(allValues[0]);
 console.log(allValues[1]);
 
-function generatePassword(){
+// Empty arrays to be used in the function
+let passOptions = [];
 
+function generatePassword(){ 
+    
+    // Establishing password length
+    let passLength = prompt("How many characters would you like your password to be?\n(Must be between 8 and 128 characters)");
+    console.log(passLength);
 
+    if (passLength < 8 || passLength > 128) {
+        alert("Password must be between 8 and 128 characters!");
+        return "Please click Generate Password again!";
+    }
 
+    // Determining what characters the user wants to include
+    let lCase = confirm("Click OK if you would like to include lowercase characters.");
+    console.log(lCase);
+    let uCase = confirm("Click OK if you would like to include uppercase characters.");
+    console.log(uCase);
+    let sChars = confirm("Click OK if you would like to include special characters.");
+    console.log(sChars);
+    let numChars = confirm("Click OK if you would like to include numerical characters.");
+    console.log(numChars);
 
+    // Converting the user inputs into an array of booleans
+    answerArray = [lCase, uCase, sChars, numChars];
+    console.log(answerArray);
 
-
-
-
-
-
+    // Using the combined array and user input array to establish the array of allowable password characters to pull from
+    if (lCase === false && uCase === false && sChars === false && numChars === false) {
+        alert("Please select at least one option!");
+        return "Please click Generate Password again!";
+    }
+    else {
+        for (let i = 0; i < answerArray.length; i++) {
+            if (answerArray[i] == true) {
+                passOptions = [...passOptions, ...allValues[i]];
+                console.log(passOptions);
+            }
+        }
+    }   
     
     return "test";  
 }
